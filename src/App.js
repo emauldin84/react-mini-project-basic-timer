@@ -10,7 +10,7 @@ class App extends Component{
   state = {
     time: '',
     displayInput: true,
-    timeRunning: null,
+    timeRunning: false,
   }
 
   handleInputChange = (e) => {
@@ -29,7 +29,10 @@ class App extends Component{
     if(this.state.time >= 0){
 
       if (!this.state.timeRunning) {
-        this.setState((prevState) => {return {timeRunning: !prevState.timeRunning}})
+        // this.setState((prevState) => {return {timeRunning: !prevState.timeRunning}})
+        this.setState({
+          timeRunning: !this.state.timeRunning
+        })
         this.timer = setInterval(() => {
           if(this.state.time > 0){
           this.setState((prevState) => { 
@@ -39,7 +42,10 @@ class App extends Component{
         }, 1000)
       } 
       if (this.state.timeRunning) {
-        this.setState((prevState) => {return {timeRunning: !prevState.timeRunning}})
+        // this.setState((prevState) => {return {timeRunning: !prevState.timeRunning}})
+        this.setState({
+          timeRunning: !this.state.timeRunning
+        })
         clearInterval(this.timer)
       }
 
@@ -53,21 +59,23 @@ class App extends Component{
       timeRunning: false,
     })
   }
-
+  
+  
   render() {
+    
     return (
       <div className="App">
           <h1>Timer</h1>
         <header className="App-header">
+              <TimerInput
+                time={this.state.time}
+                show={this.state.displayInput}
+                change={this.handleInputChange}
+                timeRunning={this.state.timeRunning}/>
           <div className='container'>
   
             <div className='timeDisplay'>
               <Timer time={this.state.time}/>
-
-              <TimerInput
-                time={this.state.time}
-                show={this.state.displayInput}
-                change={this.handleInputChange}/>
             </div>
             
             <div className='controls'>

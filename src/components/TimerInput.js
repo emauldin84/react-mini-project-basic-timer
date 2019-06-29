@@ -4,7 +4,6 @@ export default function TimerInput(props) {
     console.log('time:',props.time)
     let timerInput = null
     if(!props.timeRunning){
-        console.log('timer input')
     timerInput = 
         <div className='inputContainer'>
             <input 
@@ -15,6 +14,9 @@ export default function TimerInput(props) {
                 placeholder={props.time==='' ? 'enter seconds' : props.time}
                 maxLength="6"/>
         </div>
+    }
+    if (props.timeRunning) {
+        timerInput = <div className='inputContainer'></div>
     }
 
     return (

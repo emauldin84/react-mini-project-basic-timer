@@ -1,15 +1,25 @@
 import React from 'react'
 
 export default function TimerInput(props) {
-    return (
+    console.log('time:',props.time)
+    let timerInput = null
+    if(!props.timeRunning){
+        console.log('timer input')
+    timerInput = 
         <div className='inputContainer'>
             <input 
                 type='number' 
                 name='time'
                 // defaultValue={props.time} 
                 onChange={props.change}
-                placeholder='enter seconds'
+                placeholder={props.time==='' ? 'enter seconds' : props.time}
                 maxLength="6"/>
         </div>
+    }
+
+    return (
+        <>
+        {timerInput}
+        </>
     )
 }

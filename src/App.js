@@ -8,7 +8,7 @@ import ResetButton from './components/ResetButton'
 
 class App extends Component{
   state = {
-    time: 0,
+    time: '',
     displayInput: true,
     timeRunning: null,
   }
@@ -26,14 +26,16 @@ class App extends Component{
   // }, 1000)
 
   handleStartStopTimer = () => {
-    if(this.state.time > 0){
+    if(this.state.time >= 0){
 
       if (!this.state.timeRunning) {
         this.setState((prevState) => {return {timeRunning: !prevState.timeRunning}})
         this.timer = setInterval(() => {
+          if(this.state.time > 0){
           this.setState((prevState) => { 
             return {time: prevState.time - 1}
           })
+        }
         }, 1000)
       } 
       if (this.state.timeRunning) {
@@ -47,7 +49,7 @@ class App extends Component{
   handleClearTimer = () => {
     clearInterval(this.timer)
     this.setState({
-      time: 0,
+      time: '',
       timeRunning: false,
     })
   }
@@ -60,7 +62,6 @@ class App extends Component{
           <div className='container'>
   
             <div className='timeDisplay'>
-              <p>Timer Display</p>
               <Timer time={this.state.time}/>
 
               <TimerInput
@@ -73,7 +74,8 @@ class App extends Component{
               
               <StartStopButton 
               startStop={this.handleStartStopTimer}
-              status={this.state.timeRunning}/>
+              status={this.state.timeRunning}
+              time={this.state.time}/>
               
               <ResetButton clearTimer={this.handleClearTimer}/>
 

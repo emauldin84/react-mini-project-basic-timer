@@ -28,3 +28,7 @@ input {
   text-align: center;
   overflow-x: hidden;
 }
+
+.finalCountDown {
+  color: red;
+}
